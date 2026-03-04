@@ -637,16 +637,40 @@ REFERENCIA = """\
   press "ctrl+c", 0.5s;
   press "shift+tab", 0.1s;
 
-  Teclas especiales:
-  enter    space    tab
-  esc      ctrl     alt
-  shift    win
-  up       down
-  left     right
-  f1 .. f12
-  backspace  delete
-  home  end
-  pageup  pagedown
+  ── Teclas especiales ──────────
+
+  Flechas:
+    up        down
+    left      right
+
+  Control:
+    esc       tab
+    enter     space
+    backspace delete
+    home      end
+    pageup    pagedown
+    insert    capslock
+    numlock   scrolllock
+    printscreen pause
+
+  Modificadores:
+    ctrl      alt       shift
+    win
+
+  Función:
+    f1   f2   f3   f4
+    f5   f6   f7   f8
+    f9   f10  f11  f12
+
+  Combinaciones de ejemplo:
+    press "ctrl+c", 0.1s;
+    press "ctrl+v", 0.1s;
+    press "ctrl+z", 0.1s;
+    press "alt+tab", 0.5s;
+    press "alt+f4", 0.1s;
+    press "ctrl+alt+del", 1s;
+    press "shift+a", 0.5s;
+    press "ctrl+shift+esc", 0.1s;
 
 ▶ ESPERA
   wait 2s;
@@ -656,11 +680,6 @@ REFERENCIA = """\
   n++;       incremento
   n--;       decremento
   n = 5;     asignación
-
-▶ COMBINACIONES
-  press "ctrl+alt+del", 1s;
-  press "alt+f4", 0.1s;
-  press "shift+a", 0.5s;
 
 ▶ COMENTARIOS
   // comentario de línea
