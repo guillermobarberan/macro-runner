@@ -3,7 +3,7 @@
 ## Stack
 - Python 3.13
 - tkinter para la interfaz gráfica
-- pyautogui para simular pulsaciones de teclado reales
+- pynput para simular pulsaciones de teclado reales (opera a nivel bajo del SO, mejor compatibilidad con juegos)
 
 ## Propósito
 App de escritorio para escribir pseudocódigo y ejecutar macros de teclado reales en Windows. Útil para automatizar acciones en videojuegos.
@@ -29,5 +29,5 @@ end;
 - El parser del pseudocódigo debe ser robusto ante errores de sintaxis
 
 ## Lo que NO hacer
-- No usar librerías externas fuera de tkinter y pyautogui
+- No usar librerías externas fuera de tkinter y pynput
 - No crear múltiples archivos innecesarios
