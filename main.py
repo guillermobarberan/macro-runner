@@ -11,11 +11,29 @@ import time
 import re
 
 try:
-    import pyautogui
-    pyautogui.FAILSAFE = True
-    PYAUTOGUI_OK = True
+    from pynput.keyboard import Key, Controller as KeyboardController
+    _teclado = KeyboardController()
+    TECLAS_ESPECIALES = {
+        'enter':       Key.enter,       'space':       Key.space,
+        'tab':         Key.tab,         'esc':         Key.esc,
+        'backspace':   Key.backspace,   'delete':      Key.delete,
+        'home':        Key.home,        'end':         Key.end,
+        'pageup':      Key.page_up,     'pagedown':    Key.page_down,
+        'insert':      Key.insert,      'capslock':    Key.caps_lock,
+        'numlock':     Key.num_lock,    'scrolllock':  Key.scroll_lock,
+        'printscreen': Key.print_screen,'pause':       Key.pause,
+        'ctrl':        Key.ctrl_l,      'alt':         Key.alt_l,
+        'shift':       Key.shift,       'win':         Key.cmd,
+        'up':          Key.up,          'down':        Key.down,
+        'left':        Key.left,        'right':       Key.right,
+        'f1':  Key.f1,  'f2':  Key.f2,  'f3':  Key.f3,  'f4':  Key.f4,
+        'f5':  Key.f5,  'f6':  Key.f6,  'f7':  Key.f7,  'f8':  Key.f8,
+        'f9':  Key.f9,  'f10': Key.f10, 'f11': Key.f11, 'f12': Key.f12,
+    }
+    PYNPUT_OK = True
 except ImportError:
-    PYAUTOGUI_OK = False
+    PYNPUT_OK = False
+    TECLAS_ESPECIALES = {}
 
 # ─────────────────────────────────────────────────────────────
 # CONSTANTES DE ESTILO
@@ -436,18 +454,19 @@ class Interprete:
                 izq != der if op == '!=' else False)
 
     def _presionar(self, tecla, dur):
-        if not PYAUTOGUI_OK:
+        if not PYNPUT_OK:
             self._dormir(dur)
             return
-        teclas = [t.strip().lower() for t in tecla.split('+')]
+        partes = [t.strip().lower() for t in tecla.split('+')]
+        keys   = [TECLAS_ESPECIALES.get(t, t) for t in partes]
         try:
-            for t in teclas:
-                pyautogui.keyDown(t)
+            for k in keys:
+                _teclado.press(k)
             self._dormir(dur)
         finally:
-            for t in reversed(teclas):
+            for k in reversed(keys):
                 try:
-                    pyautogui.keyUp(t)
+                    _teclado.release(k)
                 except Exception:
                     pass
 
